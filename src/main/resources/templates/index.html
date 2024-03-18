@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>RomeMate</title>
+  <meta name="description" content=""/>
+  <meta name="viewport" content="width=device-width"/>
+  <base href="/"/>
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/home.js}"></script>
+  <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body class="container">
+<div class="d-flex align-items-center" style="min-height: 100vh">
+  <div class="login-form ">
+    <form action="#" th:action="@{/login}" th:object="${loginModel}" method="post">
+      <h2 class="text-center">Log in</h2>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Email" th:field="*{email}" required="required">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" th:field="*{password}" required="required">
+      </div>
+      <p class="text-danger text-center" th:if="${loginError}" th:text="${loginError.cause}" />
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      </div>
+    </form>
+    <p class="text-center"><a th:href="@{/oauth2/authorization/github}">Continue with Github</a></p>
+  </div>
+</div>
+</body>
+</html>

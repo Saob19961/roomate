@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/css/reservations.css}" rel="stylesheet">
+    <link href="/webjars/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <div th:fragment="main">
+        <script type="text/javascript" th:src="@{/js/spaces.js}"></script>
+
+        <section class="intro">
+            <div class="bg-image h-100 w-100">
+                <div class="mask d-flex align-items-center h-100">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <div class="card shadow-2-strong h-100 w-100">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless align-middle mb-0 bg-white" id="space_table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Equipments</th>
+                                                        <th scope="col">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="spaceModal" tabindex="-1" role="dialog" aria-labelledby="space dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>
+                            Create Space
+                        </h1>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form class="form" role="form" id="space_form" method="post">
+                                <div>
+                                    <div class="form-group">
+                                        <label for="space_name">Name</label>
+                                        <input required type="text" class="form-control" id="space_name" name="space_name" placeholder="Name" aria-label="Name" style="width:100%;">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label>Equipments</label>
+                                        <div style="width:100%">
+                                            <select class="btn" id="new_equipments" name="new_equipments" aria-label="Equipments" style="width:60%;border-color:gray;background-color:white;"></select>
+                                            <button class="btn btn-secondary" id="new_equipments_btn">Add Equipment</button>
+                                        </div>
+                                    </div>
+                                    <div class="bg-light d-flex flex-row" id="new_equipments_list" style="width:100%;padding:12px;border-radius:16px;gap:12px;">
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <button class="btn btn-primary" type="submit">Add Space to Room</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="spaceEditModal" tabindex="-1" role="dialog" aria-labelledby="space edit dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>
+                            Edit Space
+                        </h1>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form class="form" role="form" id="edit_space_form" method="post">
+                                <input disabled type="hidden" class="form-control" id="espace_id" name="espace_id" aria-label="space">
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="espace_name">Name</label>
+                                        <input required type="text" class="form-control" id="espace_name" name="espace_name" placeholder="Name" aria-label="Name" style="width:100%;">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label>Equipments</label>
+                                        <div style="width:100%">
+                                            <select class="btn" id="edit_equipments" name="edit_equipments" aria-label="Equipments" style="width:60%;border-color:gray;background-color:white;"></select>
+                                            <button class="btn btn-secondary" id="edit_equipments_btn">Add Equipment</button>
+                                        </div>
+                                    </div>
+                                    <div class="bg-light d-flex flex-row" id="edit_equipments_list" style="width:100%;padding:12px;border-radius:16px;gap:12px;"></div>
+                                </div>
+
+                                <br/>
+                                <button class="btn btn-primary" type="submit">Update Space</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="cta">
+        <select class="btn" id="space_room" name="space_room" aria-label="Room" style="width:200px;border-color:gray;background-color:white;"></select>
+        <button class="btn btn-secondary" id="spacesFilterBtn">View Spaces</button>
+        <a class="btn btn-primary" href="javascript:void(0)" role="button" data-toggle="modal" data-target="#spaceModal">Add Space</a>
+    </div>
+</body>
+</html>

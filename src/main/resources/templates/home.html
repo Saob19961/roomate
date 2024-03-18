@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>RomeMate / Home</title>
+  <meta name="description" content=""/>
+  <meta name="viewport" content="width=device-width"/>
+  <base href="/"/>
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/home.js}"></script>
+  <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/webjars/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav class="shadow-sm navbar navbar-expand-lg bg-body">
+      <div class="container-fluid">
+        <button
+                data-mdb-collapse-init
+                class="navbar-toggler"
+                type="button"
+                data-mdb-target="#navbarButtonsExample"
+                aria-controls="navbarButtonsExample"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <a class="navbar-brand" th:text="${user.getName()}" />
+
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" th:href="@{/reservations}">Reservations</a>
+            </li>
+            <li th:if="${user.isAdmin()}" class="nav-item">
+              <a class="nav-link" th:href="@{/blocking}">Blocking</a>
+            </li>
+            <li th:if="${user.isAdmin()}" class="nav-item">
+              <a class="nav-link" th:href="@{/rooms}">Rooms</a>
+            </li>
+            <li th:if="${user.isAdmin()}" class="nav-item">
+              <a class="nav-link" th:href="@{/spaces}">Spaces</a>
+            </li>
+            <li th:if="${user.isAdmin()}" class="nav-item">
+              <a class="nav-link" th:href="@{/equipments}">Equipments</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <a role="button" th:href="@{/logout}" type="button" class="btn btn-link px-3 me-2 text-danger">
+            Logout
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="bg-light p-5 text-center bg-body-tertiary">
+      <h1 class="mb-3" th:text="${page_title}" />
+      <h4 class="mb-3" th:text="${page_subtitle}" />
+      <div th:replace="${page} :: cta" />
+    </div>
+  </header>
+
+  <main>
+    <br/>
+    <div th:replace="${page} :: main" />
+  </main>
+</body>
+</html>

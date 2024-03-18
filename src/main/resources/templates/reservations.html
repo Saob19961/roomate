@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/css/reservations.css}" rel="stylesheet">
+    <link href="/webjars/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <div th:fragment="main">
+        <script type="text/javascript" th:src="@{/js/reservations.js}"></script>
+
+        <section class="intro">
+            <div class="bg-image h-100 w-100">
+                <div class="mask d-flex align-items-center h-100">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <div class="card shadow-2-strong h-100 w-100">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless align-middle mb-0 bg-white" id="reservations_table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">User</th>
+                                                        <th scope="col">Space</th>
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col">From</th>
+                                                        <th scope="col">To</th>
+                                                        <th scope="col">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="Book space dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>
+                            Book Space
+                        </h1>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form class="form" role="form" id="book_form" method="post">
+                                <div>
+                                    <div class="form-group">
+                                        <label for="book_rooms">Room</label>
+                                        <select class="form-control" id="book_rooms" name="book_rooms" aria-label="Room" style="width:100%;">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="book_arbeitplatz">Arbeitplatz</label>
+                                        <select required class="form-control" id="book_arbeitplatz" name="book_arbeitplatz" aria-label="Arbeitplatz" style="width:100%;">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="book_date">Date</label>
+                                        <input required type="date" class="form-control" id="book_date" name="book_date" placeholder="Book day" aria-label="Date" style="width:100%;">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="book_from">From</label>
+                                        <input required type="time" class="form-control" id="book_from" name="book_from" placeholder="Book from time" aria-label="From" style="width:100%;">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="book_to">To</label>
+                                        <input required type="time" class="form-control" id="book_to" name="book_to" placeholder="Book to time" aria-label="To" style="width:100%;">
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <button class="btn btn-primary" type="submit">Book</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="reservationEditModal" tabindex="-1" role="dialog" aria-labelledby="Reservation edit dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>
+                            Edit Booking
+                        </h1>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form class="form" role="form" id="res_form" method="post">
+                                <input disabled type="hidden" class="form-control" id="res_arbeitplatz_id" name="res_arbeitplatz_id" aria-label="Arbeitplatz">
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="res_arbeitplatz">Arbeitplatz</label>
+                                        <input disabled type="text" class="form-control" id="res_arbeitplatz" name="res_arbeitplatz" placeholder="Arbeitplatz" aria-label="Arbeitplatz" style="width:100%;">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="res_date">Date</label>
+                                        <input required type="date" class="form-control" id="res_date" name="res_date" placeholder="Book day" aria-label="Date" style="width:100%;">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="res_from">From</label>
+                                        <input required type="time" class="form-control" id="res_from" name="res_from" placeholder="Book from time" aria-label="From" style="width:100%;">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="res_to">To</label>
+                                        <input required type="time" class="form-control" id="res_to" name="res_to" placeholder="Book to time" aria-label="To" style="width:100%;">
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <button class="btn btn-primary" type="submit">Update booking</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="cta">
+        <a class="btn btn-secondary" href="javascript:void(0)" role="button">Query Spaces</a>
+
+        <a class="btn btn-primary" href="javascript:void(0)" role="button" data-toggle="modal" data-target="#bookModal">Book a Space</a>
+    </div>
+</body>
+</html>
